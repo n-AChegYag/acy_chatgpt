@@ -9,22 +9,13 @@ def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
-
-if __name__ == '__main__':
-    
-    api_key = ACY_API
-    max_tokens = 4000
-    image_path = "images/Snipaste_2023-12-02_00-26-43.png"
-    user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
-    output_file_name = "output.md"
-    
+# Function to understand image and save output
+def call_gpt4v_for_image_understanding(image_path, user_text, output_file_name="output.md", max_tokens=4000):
     base64_image = encode_image(image_path)
-    
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}"
+        "Authorization": f"Bearer {ACY_API}"
     }
-
     payload = {
         "model": "gpt-4-vision-preview",
         "messages": [
@@ -46,11 +37,19 @@ if __name__ == '__main__':
         ],
         "max_tokens": max_tokens,
     }
-
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-
     original_stdout = sys.stdout
     with open(f'outputs/{output_file_name}', 'w') as f:
         sys.stdout = f
         print(response.json()['choices'][0]['message']['content'])
     sys.stdout = original_stdout
+
+
+if __name__ == '__main__':
+    
+    image_path = "images/Snipaste_2023-12-02_00-26-43.png"
+    user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
+    output_file_name = "output1.md"
+    max_tokens = 4000
+    
+    call_gpt4v_for_image_understanding(image_path, user_text, output_file_name, max_tokens)
