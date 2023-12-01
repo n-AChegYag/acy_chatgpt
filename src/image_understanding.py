@@ -12,7 +12,8 @@ def encode_image(image_path):
 if __name__ == '__main__':
     
     api_key = ACY_API
-    image_path = "images/ponyo036.jpg"
+    image_path = "images/Snipaste_2023-12-02_00-26-43.png"
+    user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
     base64_image = encode_image(image_path)
 
     headers = {
@@ -28,7 +29,7 @@ if __name__ == '__main__':
                 "content": [
                     {
                         "type": "text",
-                        "text": "What’s in this image?"
+                        "text": user_text
                     },
                     {
                         "type": "image_url",
@@ -39,7 +40,7 @@ if __name__ == '__main__':
                 ]
             }
         ],
-        "max_tokens": 300
+        "max_tokens": 4000
     }
 
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)

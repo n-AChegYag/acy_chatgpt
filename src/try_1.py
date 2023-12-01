@@ -1,4 +1,3 @@
-import os
 from openai import OpenAI
 from my_api import ACY_API
 
