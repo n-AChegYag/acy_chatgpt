@@ -1,3 +1,4 @@
+import sys
 import base64
 import requests
 from my_api import ACY_API
@@ -14,6 +15,7 @@ if __name__ == '__main__':
     api_key = ACY_API
     image_path = "images/Snipaste_2023-12-02_00-26-43.png"
     user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
+    output_file_name = "output.md"
     base64_image = encode_image(image_path)
 
     headers = {
@@ -45,4 +47,8 @@ if __name__ == '__main__':
 
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
 
-    print(response.json()['choices'][0]['message']['content'])
+    original_stdout = sys.stdout
+    with open(f'outputs/{output_file_name}', 'w') as f:
+        sys.stdout = f
+        print(response.json()['choices'][0]['message']['content'])
+    sys.stdout = original_stdout
