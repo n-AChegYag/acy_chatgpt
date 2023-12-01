@@ -13,11 +13,13 @@ def encode_image(image_path):
 if __name__ == '__main__':
     
     api_key = ACY_API
+    max_tokens = 4000
     image_path = "images/Snipaste_2023-12-02_00-26-43.png"
     user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
     output_file_name = "output.md"
+    
     base64_image = encode_image(image_path)
-
+    
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}"
@@ -42,7 +44,7 @@ if __name__ == '__main__':
                 ]
             }
         ],
-        "max_tokens": 4000
+        "max_tokens": max_tokens,
     }
 
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
