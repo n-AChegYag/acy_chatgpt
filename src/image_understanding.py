@@ -47,9 +47,10 @@ def call_gpt4v_for_image_understanding(image_path, user_text, output_file_name="
 
 if __name__ == '__main__':
     
-    image_path = "images/Snipaste_2023-12-02_00-26-43.png"
-    user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
-    output_file_name = "output1.md"
+    image_path = "images/ponyo036.jpg"
+    # user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
+    user_text = "Do you know the name of the character in the picture?" # default: What’s in this image?
+    output_file_name = "output2.md"
     max_tokens = 4000
     
     call_gpt4v_for_image_understanding(image_path, user_text, output_file_name, max_tokens)
