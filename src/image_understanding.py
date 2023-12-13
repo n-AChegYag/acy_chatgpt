@@ -49,7 +49,6 @@ if __name__ == '__main__':
     
     image_path = "images/ponyo036.jpg"
     # user_text = "How to plot a figure like this using Python?" # default: What’s in this image?
-    user_text = "Do you know the name of the character in the picture?" # default: What’s in this image?
     output_file_name = "output2.md"
     max_tokens = 4000
     
